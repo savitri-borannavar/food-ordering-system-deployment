@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  php:
+    build: .
+    ports:
+      - "8080:80"
+    volumes:
+      - .:/var/www/html/
+    depends_on:
+      - mysql
+    restart: always
+
+  mysql:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: fos_db
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./fos_db.sql:/docker-entrypoint-initdb.d/fos_db.sql
+    restart: always
+
+volumes:
+  db_data:

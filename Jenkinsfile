@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_IMAGE = 'savitrinb/food_ordering_system'
+        DOCKER_IMAGE = 'savitrinb/serve_smart'
     }
 
     stages {

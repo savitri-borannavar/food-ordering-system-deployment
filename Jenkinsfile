@@ -8,7 +8,7 @@ pipeline {
     stages {
         stage('Clone Repository') {
             steps {
-                git credentialsId: 'your-jenkins-git-credential-id', url: 'https://github.com/savitri-borannavar/dev_ops.git'
+                git credentialsId: 'your-jenkins-git-credential-id', url: 'https://github.com/savitri-borannavar/food-ordering-system-deployment.git'
             }
         }
 

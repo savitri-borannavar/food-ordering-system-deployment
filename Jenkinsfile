@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_IMAGE = 'yourdockerhubusername/your-app-name'
+        DOCKER_IMAGE = 'savitrinb/food_ordering_system'
     }
 
     stages {

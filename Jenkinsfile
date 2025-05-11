@@ -14,7 +14,7 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
-                bat 'docker build -t %DOCKER_IMAGE% .'
+                bat "docker build -t %DOCKER_IMAGE% ."
             }
         }
 
@@ -27,17 +27,15 @@ pipeline {
         stage('Push to Docker Hub') {
             steps {
                 withCredentials([usernamePassword(credentialsId: '007643c0-9a20-4874-9b09-2a0926ff1d75', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
-                    bat '''
-                        docker login -u %DOCKER_USER% -p %DOCKER_PASS%
-                        docker push %DOCKER_IMAGE%
-                    '''
+                    bat "echo %DOCKER_PASS% | docker login -u %DOCKER_USER% --password-stdin"
+                    bat "docker push %DOCKER_IMAGE%"
                 }
             }
         }
 
         stage('Cleanup') {
             steps {
-                bat 'docker rmi %DOCKER_IMAGE%'
+                bat "docker rmi %DOCKER_IMAGE%"
             }
         }
     }

@@ -28,10 +28,16 @@ pipeline {
             steps {
                 withCredentials([usernamePassword(credentialsId: '007643c0-9a20-4874-9b09-2a0926ff1d75', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
                     bat '''
-                        echo %DOCKER_PASS% | docker login -u %DOCKER_USER% --password-stdin
+                        docker login -u %DOCKER_USER% -p %DOCKER_PASS%
                         docker push %DOCKER_IMAGE%
                     '''
                 }
+            }
+        }
+
+        stage('Cleanup') {
+            steps {
+                bat 'docker rmi %DOCKER_IMAGE%'
             }
         }
     }

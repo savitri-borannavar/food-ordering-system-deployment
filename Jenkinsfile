@@ -28,7 +28,8 @@ pipeline {
             steps {
                 withCredentials([usernamePassword(credentialsId: '007643c0-9a20-4874-9b09-2a0926ff1d75', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
             bat '''
-            docker login -u %DOCKER_USER% -p %DOCKER_PASS%
+             echo "Savi3@123" | docker login -u savitrinb --password-stdin
+
              docker push %DOCKER_IMAGE%:latest
                '''
               }   

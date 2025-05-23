@@ -1,25 +1,23 @@
-# Use the smallest possible PHP-Apache base image
-FROM php:8.1-apache-slim
+# Start from official PHP Apache image
+FROM php:8.1-apache
 
-# Install only what's required (mysqli for MySQL)
-RUN apt-get update && apt-get install -y \
-    libpng-dev \
-    libonig-dev \
-    libxml2-dev \
-    && docker-php-ext-install mysqli \
-    && apt-get clean && rm -rf /var/lib/apt/lists/*
+# Install only what's required — here, mysqli
+RUN docker-php-ext-install mysqli
 
-# Enable Apache mod_rewrite (for .htaccess support)
+# Enable Apache mod_rewrite (useful for .htaccess)
 RUN a2enmod rewrite
 
-# Set the working directory
+# Set working directory
 WORKDIR /var/www/html
 
-# Copy only the necessary files
+# Copy your project files into the container
 COPY . /var/www/html
 
-# Set permissions
+# Set appropriate permissions
 RUN chown -R www-data:www-data /var/www/html
 
-# Expose the default Apache port
+# Clean unnecessary files to reduce image size
+RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+# Expose default Apache port
 EXPOSE 80

@@ -1,0 +1,28 @@
+# Version control
+.git
+.gitignore
+
+# Dependency folders
+node_modules
+vendor
+
+# Editor files
+.vscode
+.idea
+
+# System files
+.DS_Store
+*.swp
+*.bak
+
+# Sensitive files
+.env
+
+# Unnecessary docs or outputs
+*.log
+*.md
+*.zip
+*.tar.gz
+*.sql
+docker-compose.yml
+Dockerfile
